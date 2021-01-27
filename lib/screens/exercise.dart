@@ -1,5 +1,6 @@
 import 'package:demo/screens/Day1/exercise1.dart';
 import 'package:demo/screens/Day1/exercise2.dart';
+import 'package:demo/screens/Day2/todolist.dart';
 import 'package:flutter/material.dart';
 
 class Exercise extends StatelessWidget {
@@ -27,7 +28,15 @@ class Exercise extends StatelessWidget {
                   builder: (context) => Exercise2(),
                 )),
             child: Text('Ex2'),
-          )
+          ),
+          RaisedButton(
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TodoList(),
+                )),
+            child: Text('Ex3'),
+          ),
         ],
       ),
     );

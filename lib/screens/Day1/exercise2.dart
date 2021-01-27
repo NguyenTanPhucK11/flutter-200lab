@@ -125,10 +125,10 @@ class Exercise2 extends StatelessWidget {
             ],
           ),
           Positioned(
-            width: 160,
-            height: 160,
-            top: 410,
-            left: 50,
+            width: 140,
+            height: 140,
+            bottom: (0.9 / 3) * MediaQuery.of(context).size.height,
+            left: (1 / 8) * MediaQuery.of(context).size.width,
             child: Container(
               color: Colors.black38,
             ),
