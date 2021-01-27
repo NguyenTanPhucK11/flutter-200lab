@@ -25,7 +25,7 @@ class Exercise2 extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                     child: Container(
-                                      color: Colors.grey,
+                                      color: Colors.red,
                                     ),
                                   ),
                                   Expanded(

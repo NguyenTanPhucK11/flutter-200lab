@@ -1,6 +1,6 @@
-import 'package:demo/screens/Day1/exercise1.dart';
-import 'package:demo/screens/Day1/exercise2.dart';
-import 'package:demo/screens/Day2/todolist.dart';
+import 'package:demo/screens/Day1/ex1_screen.dart';
+import 'package:demo/screens/Day1/ex2_screen.dart';
+import 'package:demo/screens/Day2/ex3_screen.dart';
 import 'package:flutter/material.dart';
 
 class Exercise extends StatelessWidget {
