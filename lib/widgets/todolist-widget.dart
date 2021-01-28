@@ -1,4 +1,7 @@
+import 'package:demo/providers/todo.dart';
+import 'package:demo/providers/todos.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TodoListView extends StatefulWidget {
   @override
@@ -8,54 +11,57 @@ class TodoListView extends StatefulWidget {
 }
 
 class _TodoListViewState extends State<TodoListView> {
-  final _items = List<String>.generate(9, (index) => '${index + 1}');
-  final _listCheckDone = List<bool>.generate(9, (index) => false);
-
   @override
   Widget build(BuildContext context) {
+    final _todos = Provider.of<Todos>(context, listen: false).todos;
     return ListView.builder(
       padding: const EdgeInsets.all(8),
-      itemCount: _items.length,
+      itemCount: _todos.length,
       itemBuilder: (BuildContext context, int index) {
-        final _item = _items[index];
+        final _item = _todos[index];
         return widget.filter == 0
-            ? dismissible(_item, index)
+            ? listTileTodo(_todos, index)
             : (widget.filter == 1
-                ? (_listCheckDone[index]
-                    ? dismissible(_item, index)
-                    : Container())
-                : !_listCheckDone[index]
-                    ? dismissible(_item, index)
+                ? (_item.isDone ? listTileTodo(_todos, index) : Container())
+                : !_item.isDone
+                    ? listTileTodo(_todos, index)
                     : Container());
       },
     );
   }
 
-  Widget dismissible(_item, index) {
+  Widget listTileTodo(_todos, index) {
     return Dismissible(
-      key: Key(_item),
+      key: Key(_todos[index].id),
       onDismissed: (direction) {
         setState(() {
-          _items.removeAt(index);
-          _listCheckDone.removeAt(index);
+          Provider.of<Todos>(context, listen: false)
+              .removeTodo(_todos[index].id);
         });
+        Scaffold.of(context).showSnackBar(
+            SnackBar(content: Text("Deleted todo ${_todos[index].title}")));
       },
-      background: Container(
-        color: Colors.red,
-        child: Icon(Icons.delete),
-      ),
+      background: Container(color: Colors.red),
       child: ListTile(
         trailing: Icon(
-          _listCheckDone[index]
+          _todos[index].isDone
               ? Icons.check_box
               : Icons.check_box_outline_blank,
-          color: _listCheckDone[index] ? Colors.blue : null,
+          color: _todos[index].isDone ? Colors.blue : null,
         ),
-        title: Text('Title $_item'),
-        subtitle: Text('description $_item'),
+        title: Text('${_todos[index].title}'),
+        subtitle: Text('${_todos[index].desc}'),
         onTap: () {
           setState(() {
-            _listCheckDone[index] = !_listCheckDone[index];
+            Provider.of<Todos>(context, listen: false).updateTodo(
+                _todos[index].id,
+                Todo(
+                  id: _todos[index].id,
+                  desc: _todos[index].desc,
+                  title: _todos[index].title,
+                  date: _todos[index].date,
+                  isDone: !_todos[index].isDone,
+                ));
           });
         },
       ),

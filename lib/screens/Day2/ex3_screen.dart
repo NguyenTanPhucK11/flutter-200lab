@@ -1,6 +1,10 @@
+import 'package:demo/providers/todo.dart';
+import 'package:demo/providers/todos.dart';
+import 'package:demo/screens/Day2/add_todo_screen.dart';
 import 'package:demo/widgets/todolist-widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -13,39 +17,54 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            width: 400,
-            child: CupertinoSlidingSegmentedControl(
-                groupValue: filter,
-                backgroundColor:
-                    filter == 2 ? Colors.red.shade200 : Colors.blue.shade200,
-                children: const <int, Widget>{
-                  0: Text('All'),
-                  1: Text('Done'),
-                  2: Text('Pending'),
-                },
-                onValueChanged: (value) {
-                  setState(() {
-                    filter = value;
-                  });
-                }),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: TodoListView(
-              filter: filter,
-            ),
-          ),
-        ],
+      body: _buildBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddTodo()),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
 
+  Widget _buildBody() {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          width: 400,
+          child: CupertinoSlidingSegmentedControl(
+              groupValue: filter,
+              backgroundColor:
+                  filter == 2 ? Colors.red.shade200 : Colors.blue.shade200,
+              children: const <int, Widget>{
+                0: Text('All'),
+                1: Text('Done'),
+                2: Text('Pending'),
+              },
+              onValueChanged: (value) {
+                setState(() {
+                  filter = value;
+                });
+              }),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: TodoListView(
+            filter: filter,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildAppBar() {
+    final _lengthTodos =
+        Provider.of<Todos>(context, listen: false).todos.length.toString();
     return AppBar(
       title: Text('Todo List'),
       actions: [
@@ -54,7 +73,14 @@ class _TodoListState extends State<TodoList> {
           child: IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              setState(() {});
+              setState(() {
+                Provider.of<Todos>(context, listen: false).addTodo(Todo(
+                    desc: _lengthTodos,
+                    title: _lengthTodos,
+                    date: _lengthTodos,
+                    id: _lengthTodos.toString(),
+                    isDone: true));
+              });
             },
           ),
         ),
