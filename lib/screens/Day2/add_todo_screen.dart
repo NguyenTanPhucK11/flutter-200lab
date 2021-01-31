@@ -10,8 +10,8 @@ class AddTodo extends StatefulWidget {
 }
 
 class _AddTodoState extends State<AddTodo> {
-  var _title = TextEditingController();
-  var _desc = TextEditingController();
+  var _titleController = TextEditingController();
+  var _descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +28,17 @@ class _AddTodoState extends State<AddTodo> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _textInput('Title', 'Title', _title),
-        _textInput('Description', 'Description', _desc),
+        _textInput('Title', 'Title', _titleController),
+        _textInput('Description', 'Description', _descController),
         RaisedButton(
           color: Colors.orangeAccent,
           child: Text('Done'),
           onPressed: () {
-            if (_title.text != '' && _desc.text != '') {
+            if (_titleController.text != '' && _descController.text != '') {
               Provider.of<Todos>(context, listen: false).addTodo(
                 Todo(
-                  desc: _desc.text,
-                  title: _title.text,
+                  desc: _descController.text,
+                  title: _titleController.text,
                   date: 'null',
                   id: Provider.of<Todos>(context, listen: false)
                       .todos

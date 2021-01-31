@@ -19,7 +19,7 @@ class Exercise extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Exercise1(),
                 )),
-            child: Text('Ex1'),
+            child: Text('Ex11111112'),
           ),
           RaisedButton(
             onPressed: () => Navigator.push(

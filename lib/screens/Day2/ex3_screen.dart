@@ -12,7 +12,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  int filter = 0;
+  String filter = 'All';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +38,13 @@ class _TodoListState extends State<TodoList> {
           width: 400,
           child: CupertinoSlidingSegmentedControl(
               groupValue: filter,
-              backgroundColor:
-                  filter == 2 ? Colors.red.shade200 : Colors.blue.shade200,
-              children: const <int, Widget>{
-                0: Text('All'),
-                1: Text('Done'),
-                2: Text('Pending'),
+              backgroundColor: filter == 'Pending'
+                  ? Colors.red.shade200
+                  : Colors.blue.shade200,
+              children: const <String, Widget>{
+                'All': Text('All'),
+                'Done': Text('Done'),
+                'Pending': Text('Pending'),
               },
               onValueChanged: (value) {
                 setState(() {

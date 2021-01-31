@@ -26,6 +26,13 @@ class _Exercise1State extends State<Exercise1> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    temperatureC.dispose();
+    temperatureF.dispose();
+    super.dispose();
+  }
+
   Widget _buildBody() {
     return Center(
       child: Column(
