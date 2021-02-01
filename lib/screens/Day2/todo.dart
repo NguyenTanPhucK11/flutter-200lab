@@ -1,7 +1,6 @@
-import 'package:demo/providers/todo.dart';
-import 'package:demo/providers/todos.dart';
 import 'package:demo/screens/Day2/add_todo_screen.dart';
-import 'package:demo/widgets/todolist-widget.dart';
+import 'package:demo/theme/theme.dart';
+import 'package:demo/widgets/todolist_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,19 +12,28 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
   String filter = 'All';
+  bool _isLight = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddTodo()),
-          );
-        },
-        child: Icon(Icons.add),
+    ThemeData _lightTheme =
+        Provider.of<ThemeChanger>(context, listen: false).getLightTheme();
+    ThemeData _darkTheme =
+        Provider.of<ThemeChanger>(context, listen: false).getDarkTheme();
+    return MaterialApp(
+      theme: _isLight ? _lightTheme : _darkTheme,
+      home: Scaffold(
+        appBar: _buildAppBar(),
+        body: _buildBody(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddTodo()),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -64,28 +72,18 @@ class _TodoListState extends State<TodoList> {
   }
 
   Widget _buildAppBar() {
-    final _lengthTodos =
-        Provider.of<Todos>(context, listen: false).todos.length.toString();
     return AppBar(
       title: Text('Todo List'),
-      actions: [
-        Container(
-          padding: const EdgeInsets.only(right: 12),
-          child: IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              setState(() {
-                Provider.of<Todos>(context, listen: false).addTodo(Todo(
-                    desc: _lengthTodos,
-                    title: _lengthTodos,
-                    date: _lengthTodos,
-                    id: _lengthTodos.toString(),
-                    isDone: true));
-              });
-            },
-          ),
+      leading: Center(
+        child: Switch(
+          value: _isLight,
+          onChanged: (value) {
+            setState(() {
+              _isLight = value;
+            });
+          },
         ),
-      ],
+      ),
     );
   }
 }

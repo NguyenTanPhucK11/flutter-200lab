@@ -1,6 +1,6 @@
 import 'package:demo/providers/todo.dart';
 import 'package:demo/providers/todos.dart';
-import 'package:demo/screens/Day2/ex3_screen.dart';
+import 'package:demo/screens/Day2/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

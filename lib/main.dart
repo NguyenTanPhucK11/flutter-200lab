@@ -1,4 +1,6 @@
-import 'package:demo/screens/exercise_screen.dart';
+import 'package:demo/exercise_screen.dart';
+import 'package:demo/providers/profiles.dart';
+import 'package:demo/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './providers/todos.dart';
@@ -15,6 +17,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: Todos(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ThemeChanger(ThemeData.dark()),
+        ),
+        ChangeNotifierProvider.value(
+          value: Profiles(),
         ),
       ],
       child: MaterialApp(

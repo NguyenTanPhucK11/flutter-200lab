@@ -1,9 +1,17 @@
-import 'package:demo/screens/Day1/ex1_screen.dart';
+import 'package:demo/screens/Day1/convertFToC.dart';
 import 'package:demo/screens/Day1/ex2_screen.dart';
-import 'package:demo/screens/Day2/ex3_screen.dart';
+import 'package:demo/screens/Day2/todo.dart';
+import 'package:demo/screens/Day3/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class Exercise extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ScaffoldAppWithTheme();
+  }
+}
+
+class ScaffoldAppWithTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +27,7 @@ class Exercise extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Exercise1(),
                 )),
-            child: Text('Ex11111112'),
+            child: Text('Ex'),
           ),
           RaisedButton(
             onPressed: () => Navigator.push(
@@ -36,6 +44,14 @@ class Exercise extends StatelessWidget {
                   builder: (context) => TodoList(),
                 )),
             child: Text('Ex3'),
+          ),
+          RaisedButton(
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Profile(),
+                )),
+            child: Text('Ex4'),
           ),
         ],
       ),

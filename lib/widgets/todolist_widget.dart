@@ -19,49 +19,46 @@ class _TodoListViewState extends State<TodoListView> {
       itemCount: _todos.length,
       itemBuilder: (BuildContext context, int index) {
         final _item = _todos[index];
-        return widget.filter == 'All'
-            ? listTileTodo(_todos, index)
-            : (widget.filter == 'Done'
-                ? (_item.isDone ? listTileTodo(_todos, index) : Container())
-                : !_item.isDone
-                    ? listTileTodo(_todos, index)
-                    : Container());
+        if (widget.filter == 'All' ||
+            widget.filter == 'Done' && _item.isDone ||
+            widget.filter == 'Pending' && !_item.isDone)
+          return listTileTodo(_todos, index);
+
+        return const SizedBox();
       },
     );
   }
 
   Widget listTileTodo(_todos, index) {
+    final _todoIndex = _todos[index];
     return Dismissible(
-      key: Key(_todos[index].id),
+      key: Key(_todoIndex.id),
       onDismissed: (direction) {
         setState(() {
-          Provider.of<Todos>(context, listen: false)
-              .removeTodo(_todos[index].id);
+          Provider.of<Todos>(context, listen: false).removeTodo(_todoIndex.id);
         });
         Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("Deleted todo ${_todos[index].title}")));
+            SnackBar(content: Text("Deleted todo ${_todoIndex.title}")));
       },
       background: Container(color: Colors.red),
       child: Card(
         child: ListTile(
           trailing: Icon(
-            _todos[index].isDone
-                ? Icons.check_box
-                : Icons.check_box_outline_blank,
-            color: _todos[index].isDone ? Colors.blue : null,
+            _todoIndex.isDone ? Icons.check_box : Icons.check_box_outline_blank,
+            color: _todoIndex.isDone ? Colors.blue : null,
           ),
-          title: Text('${_todos[index].title}'),
-          subtitle: Text('${_todos[index].desc}'),
+          title: Text('${_todoIndex.title}'),
+          subtitle: Text('${_todoIndex.desc}'),
           onTap: () {
             setState(() {
               Provider.of<Todos>(context, listen: false).updateTodo(
-                  _todos[index].id,
+                  _todoIndex.id,
                   Todo(
-                    id: _todos[index].id,
-                    desc: _todos[index].desc,
-                    title: _todos[index].title,
-                    date: _todos[index].date,
-                    isDone: !_todos[index].isDone,
+                    id: _todoIndex.id,
+                    desc: _todoIndex.desc,
+                    title: _todoIndex.title,
+                    date: _todoIndex.date,
+                    isDone: !_todoIndex.isDone,
                   ));
             });
           },
