@@ -27,7 +27,7 @@ class ScaffoldAppWithTheme extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Exercise1(),
                 )),
-            child: Text('Ex'),
+            child: Text('Day1'),
           ),
           RaisedButton(
             onPressed: () => Navigator.push(
@@ -35,7 +35,7 @@ class ScaffoldAppWithTheme extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Exercise2(),
                 )),
-            child: Text('Ex2'),
+            child: Text('Day1'),
           ),
           RaisedButton(
             onPressed: () => Navigator.push(
@@ -43,7 +43,7 @@ class ScaffoldAppWithTheme extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => TodoList(),
                 )),
-            child: Text('Ex3'),
+            child: Text('Day2'),
           ),
           RaisedButton(
             onPressed: () => Navigator.push(
@@ -51,7 +51,7 @@ class ScaffoldAppWithTheme extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Profile(),
                 )),
-            child: Text('Ex4'),
+            child: Text('Day3'),
           ),
         ],
       ),
