@@ -4,6 +4,8 @@ import 'package:demo/screens/Day2/todo.dart';
 import 'package:demo/screens/Day3/profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/Day5/login-screen.dart';
+
 class Exercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,43 +20,27 @@ class ScaffoldAppWithTheme extends StatelessWidget {
       appBar: AppBar(
         title: Text('Exercise'),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Wrap(
+        alignment: WrapAlignment.start,
         children: <Widget>[
-          RaisedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Exercise1(),
-                )),
-            child: Text('Day1'),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Exercise2(),
-                )),
-            child: Text('Day1'),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TodoList(),
-                )),
-            child: Text('Day2'),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Profile(),
-                )),
-            child: Text('Day3'),
-          ),
+          _buttonDay(Exercise1(), 'Day 1', context),
+          _buttonDay(Exercise2(), 'Day 1', context),
+          _buttonDay(TodoList(), 'Day 2', context),
+          _buttonDay(Profile(), 'Day 3', context),
+          _buttonDay(Login(), 'Day 5', context),
         ],
       ),
+    );
+  }
+
+  _buttonDay(Widget f, String name, BuildContext ctx) {
+    return ElevatedButton(
+      onPressed: () => Navigator.push(
+          ctx,
+          MaterialPageRoute(
+            builder: (context) => f,
+          )),
+      child: Text(name),
     );
   }
 }

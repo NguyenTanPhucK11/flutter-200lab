@@ -45,9 +45,9 @@ class Todos with ChangeNotifier {
   }
 
   void updateTodo(String id, Todo newTodo) {
-    final todoId = _todos.indexWhere((todos) => todos.id == id);
-    if (todoId >= 0) {
-      _todos[todoId] = newTodo;
+    final index = _todos.indexWhere((todo) => todo.id == id);
+    if (index >= 0) {
+      _todos[index] = newTodo;
       notifyListeners();
     } else {
       print('can\'t find');

@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TodoListView extends StatefulWidget {
-  @override
-  _TodoListViewState createState() => _TodoListViewState();
   final String filter;
   TodoListView({Key key, @required this.filter}) : super(key: key);
+
+  @override
+  _TodoListViewState createState() => _TodoListViewState();
 }
 
 class _TodoListViewState extends State<TodoListView> {
