@@ -1,5 +1,6 @@
 import 'package:demo/exercise_screen.dart';
 import 'package:demo/providers/profiles.dart';
+import 'package:demo/screens/Day2/todo.dart';
 import 'package:demo/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Exercise(),
+        home: TodoList(),
       ),
     );
   }
