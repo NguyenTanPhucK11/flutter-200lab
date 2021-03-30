@@ -1,5 +1,6 @@
 import 'package:demo/screens/Day1/convertFToC.dart';
 import 'package:demo/screens/Day1/ex2_screen.dart';
+import 'package:demo/screens/Day10/bloc.dart';
 import 'package:demo/screens/Day2/todo.dart';
 import 'package:demo/screens/Day3/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class ScaffoldAppWithTheme extends StatelessWidget {
           _buttonDay(TodoList(), 'Day 2', context),
           _buttonDay(Profile(), 'Day 3', context),
           _buttonDay(Login(), 'Day 5', context),
+          _buttonDay(Bloc(), 'Day 5', context),
         ],
       ),
     );
